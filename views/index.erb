@@ -4,6 +4,8 @@
 <a href ='/sign_in'>ログイン</a>
 
 <% else %>
+<% id= session[:user] %>
+<a href="/<%= session[:user] %>">マイページ</a>
 <a href ="/sign_out">ログアウト</a>
 <form action="/" method="POST">
     <input type="text" name="content">

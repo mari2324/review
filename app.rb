@@ -39,7 +39,7 @@ end
 post '/sign_in' do
     user=User.find_by(mail: params[:mail])
     if user && user.authenticate(params[:password])
-        session[:user]=User.id
+        session[:user]=user.id
     end
     redirect '/'
 end
@@ -50,4 +50,9 @@ post '/' do
         user_id: session[:user]
     )
     redirect '/'
+end
+
+get '/:id' do
+    @myreviews=Review.find_by(id: params[:id])
+    erb :mypage
 end

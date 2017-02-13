@@ -1,0 +1,9 @@
+
+<table>
+ <% @myreviews.each do |myreview| %>
+  <tr>
+    <td><%= myreview.content %></td>
+    <td><%= myreview.user_id %></td>
+  </tr>
+ <% end %>
+</table>
