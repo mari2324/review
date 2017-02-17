@@ -53,6 +53,28 @@ post '/' do
 end
 
 get '/:id' do
-    @myreviews=Review.find_by(id: params[:id])
+    @user =User.find_by(id: params[:id])
+    if @user.nil?
+        @myreviews =[]
+    else
+        @myreviews=@user.reviews
+    # @myreviews=Review.where(user_id: params[:id])
+end
     erb :mypage
+end
+
+post '/:id/delete' do 
+    review=Review.find_by(id: params[:id])
+     review.delete
+    redirect '/'
+end
+
+get '/:id/edit' do 
+    @editreview=Review.find_by(id: params[:id])
+    erb :edit
+end
+
+post '/:id/edit' do
+    Review.find_by(id: params[:id]).update(content: params[:edit])
+    redirect '/'
 end

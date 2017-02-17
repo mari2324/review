@@ -4,6 +4,11 @@
   <tr>
     <td><%= myreview.content %></td>
     <td><%= myreview.user_id %></td>
+    <% if myreview.user_id==session[:user]%>
+    <td>
+     <form action ="<%=myreview.id%>/delete" method=POST><input type="submit" value="X"></form>
+    </td>
+    <% end %>
   </tr>
  <% end %>
 </table>
