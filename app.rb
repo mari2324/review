@@ -45,10 +45,21 @@ post '/sign_in' do
 end
 
 post '/' do
-    Review.create(
+    r=Review.create(
         content: params[:content],
-        user_id: session[:user]
+        user_id: session[:user],
     )
+    tag_array = Array.new
+    s=params[:tag].split(" ")
+    s.each do |sd|
+        tag=Tag.find_by(tag_name: sd)
+        if tag == nil
+            tag=Tag.create(tag_name: sd)
+        end
+        tag_array << tag
+    end
+    r.tags=tag_array
+    
     redirect '/'
 end
 
@@ -58,8 +69,7 @@ get '/:id' do
         @myreviews =[]
     else
         @myreviews=@user.reviews
-    # @myreviews=Review.where(user_id: params[:id])
-end
+    end
     erb :mypage
 end
 
