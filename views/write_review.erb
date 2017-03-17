@@ -1,15 +1,16 @@
-<body>
-<form action=/sign_in method=POST>
+
+<form action="/write_review" method="POST">
     <div class="center">
-    <input type="text" name="mail" placeholder="メールアドレス"><br>
-    <input type="text" name="password" placeholder="パスワード"><br>
-    <input type="submit"  value="ログイン">
+    <input type="text" name="content" placeholder="レビュー"><br>
+    <p>タグ</p><br>
+    <input type="text" name="tag" placeholder="スペースで複数タグを追加できます">
+    <input type="submit" value="投稿する">
     </div>
 </form>
+
 <style type="text/css">
     input{
         width:600px;
-        height:45px;
         margin-bottom:20px;
         font-size:15px;
     }
@@ -32,6 +33,4 @@
      .center{
          margin-top:150px;
      }
-
 </style>
-</body>

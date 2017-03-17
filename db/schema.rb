@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224103453) do
+ActiveRecord::Schema.define(version: 20170317064818) do
 
   create_table "review_tags", force: :cascade do |t|
     t.integer "tag_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170224103453) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "user_name"
   end
 
 end

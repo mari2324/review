@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset ="UTF-8">
+        <title>ホーム</title>
+        <link rel="stylesheet" type="text/css" href="/main.css">
+        <script src="/main.js"></script>
+    </head>
+    <body>
+        <header>
 <% unless session[:user] %>
 
 <a href ='/sign_up'>新規登録</a>
@@ -5,27 +15,50 @@
 
 <% else %>
 <% id= session[:user] %>
-<a href="/<%= session[:user] %>">マイページ</a>
 <a href ="/sign_out">ログアウト</a>
-<form action="/" method="POST">
-    <input type="text" name="content">
-    <input type="text" name="tag">
-    <input type="submit" value="投稿する">
-</form>
-<table>
- <% @reviews.each do |review| %>
-  <tr>
-    <td><%= review.content %></td>
-    <td><%= review.user_id %></td>
-    <td><% review.tags.each do |tag| %>
-    <%= tag.tag_name %>
-    <% end %>
-    </td>
-    <% if review.user_id==session[:user] %>
-    <td><form action="/<%=review.id%>/delete" method="POST"><input type ="submit" value="X"></form></td>
-    <td><form action="/<%=review.id%>/edit" method="GET"><input type ="submit" value="編集"></form></td>
-    <% end %>
-  </tr>
- <% end %>
-</table>
+<a href="/<%= session[:user] %>">マイページ</a>
+<a href="/write_review">レビューを書く</a>
 <% end %>
+         </header>
+         
+
+ <div class = "main">
+ <div class ="cards">
+ <% @reviews.each do |review| %>
+ <div class="card">
+     
+  <div class ="card_header">
+    <div class ="user_name"><%= review.user_id %></div>
+
+    <% if review.user_id==session[:user] %>
+    <form action="/<%=review.id%>/delete" method="POST"><input type ="submit" value="X"></form>
+    <form onclick="clickEdit()" data-reviewid="<%=review.id%>" action="#"><input type ="submit" value="編集"></form>
+    <% end %>
+  </div>
+    
+    <div class ="content"><%= review.content %></div>
+    
+    <div class ="tag_list">
+        <% review.tags.each do |tag| %>
+        <div class ="tag_each"><a href="/<%= tag.id%>/review"><%= tag.tag_name %><a></a></div>
+        <% end %>
+    </div>
+ </div>
+ <% end %>
+ </div>
+
+
+<div class ="tag_all">
+    <h2>タグ一覧</h2>
+    <% @tags.each do |tag| %>
+        <div class ="tag_each"><a href="/<%= tag.id %>/review"><%= tag.tag_name %></a></div>
+    <% end %>
+</div>
+        </div>
+        
+<div id = "modal">
+    <form action ="/edit" method ="post" name="editing">
+        <input type="text" name ="content">
+        <input type="submit" name ="submit" onclick="clickSubmit()">
+    </form>
+</div>

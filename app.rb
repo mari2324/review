@@ -7,6 +7,7 @@ enable :sessions
 
 get '/' do
     @reviews=Review.all
+    @tags=Tag.all
     erb :index
 end
 
@@ -44,13 +45,13 @@ post '/sign_in' do
     redirect '/'
 end
 
-post '/' do
+post '/write_review' do
     r=Review.create(
         content: params[:content],
         user_id: session[:user],
     )
     tag_array = Array.new
-    s=params[:tag].split(" ")
+    s=params[:tag].split(/[ 　]/)
     s.each do |sd|
         tag=Tag.find_by(tag_name: sd)
         if tag == nil
@@ -80,11 +81,25 @@ post '/:id/delete' do
 end
 
 get '/:id/edit' do 
+    @reviews=Review.all
+    @tags=Tag.all
     @editreview=Review.find_by(id: params[:id])
-    erb :edit
+    erb :index
+    # erb :edit
 end
 
 post '/:id/edit' do
     Review.find_by(id: params[:id]).update(content: params[:edit])
     redirect '/'
+end
+
+get '/:id/review' do
+    Review.where()
+end
+
+get '/write_review' do
+    erb :write_review
+end
+
+post '/write_review' do
 end

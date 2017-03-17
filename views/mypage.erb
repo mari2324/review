@@ -1,14 +1,109 @@
+<header>
+ <% unless session[:user] %>
 
-<table>
+<a href ='/sign_up'>新規登録</a>
+<a href ='/sign_in'>ログイン</a>
+
+<% else %>
+<% id= session[:user] %>
+<a href ="/sign_out">ログアウト</a>
+<a href="/">ホーム</a>
+<a href="/write_review">レビューを書く</a>
+<% end %>
+         
+</header>
+<body><div class = "main">
+ <div class ="cards">
  <% @myreviews.each do |myreview| %>
-  <tr>
-    <td><%= myreview.content %></td>
-    <td><%= myreview.user_id %></td>
-    <% if myreview.user_id==session[:user]%>
-    <td>
-     <form action ="<%=myreview.id%>/delete" method=POST><input type="submit" value="X"></form>
-    </td>
+ <div class="card">
+     
+  <div class ="card_header">
+    <div class ="user_name"><%= myreview.user_id %></div>
+
+    <% if myreview.user_id==session[:user] %>
+    <form action="/<%=myreview.id%>/delete" method="POST"><input type ="submit" value="X"></form>
+    <form onclick="clickEdit()" data-reviewid="<%=myreview.id%>" action="#"><input type ="submit" value="編集"></form>
     <% end %>
-  </tr>
+  </div>
+    
+    <div class ="content"><%= myreview.content %></div>
+    
+    <div class ="tag_list">
+        <% myreview.tags.each do |tag| %>
+        <div class ="tag_each"><a href="/<%= tag.id %>/review"><%= tag.tag_name %><a></a></div>
+        <% end %>
+    </div>
+ </div>
  <% end %>
-</table>
+ </div>
+
+<style type="text/css">
+body{
+  background-color:#f5f5f5;
+ }
+*{
+    margin:0px;
+    padding:0px;
+}
+header{
+    background-color: #DA5019;
+    color: #ffffff;
+    width:100%;
+    height:70px;
+    
+}
+header a{
+    color: #ffffff;
+    font-size:20px;
+    float:right;
+    padding:20px 30px;
+    border-left-style: solid;
+    border-left:1px #ffffff solid;
+    text-decoration:none;
+}
+ .card{
+    background-color: #ffffff;
+    border-color: #000000;
+    width:300px;
+    height:250px;
+    color:#000000;
+    float:left;
+    margin: 10px;
+}
+.card_header{
+    width:100%;
+    float:left;
+}
+.card_header form{
+    width:50px;
+    float: left;
+}
+.user_name{
+    width:200px;
+    float:left;
+}
+
+.content{
+    height:200px;
+    border-top:solid;
+    border-bottom: solid;
+    border-color: #f5f5f5;
+    border-width: medium;
+}
+
+.tag_list{
+    float:left;
+}
+.tag_each{
+    border: solid;
+    border-color:#f5f5f5;
+    border-radius: 20px;
+    float:left;
+    padding:2px 5px;
+}
+.tag_each a{
+    color:#000000;
+    text-decoration:none;
+}
+</style>
+</body>

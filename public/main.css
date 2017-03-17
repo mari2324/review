@@ -1,0 +1,89 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+header{
+    background-color: #DA5019;
+    color: #ffffff;
+    width:100%;
+    height:70px;
+    
+}
+header a{
+    color: #ffffff;
+    font-size:20px;
+    float:right;
+    padding:20px 30px;
+    text-decoration:none;
+    border-left-style: solid;
+    border-left:1px #ffffff solid;
+}
+body{
+    background-color: #f5f5f5;
+}
+.main{
+    background-color: #f5f5f5;
+    display: flex;
+    width: 100%;
+}
+.cards{
+    flex:1;
+}
+.card{
+    background-color: #ffffff;
+    border-color: #000000;
+    width:300px;
+    height:250px;
+    color:#000000;
+    float:left;
+    margin: 10px;
+}
+.card_header{
+    width:100%;
+    float:left;
+}
+.card_header form{
+    width:50px;
+    float: left;
+}
+.user_name{
+    width:200px;
+    float:left;
+}
+
+.content{
+    height:200px;
+    border-top:solid;
+    border-bottom: solid;
+    border-color: #f5f5f5;
+    border-width: medium;
+}
+
+.tag_list{
+    float:left;
+}
+.tag_all{
+    width:280px;
+    background-color: #ffffff;
+    margin:10px;
+}
+
+.tag_each{
+    border: solid;
+    border-color:#f5f5f5;
+    border-radius: 20px;
+    float:left;
+    padding:2px 5px;
+}
+.tag_each a{
+    color:#000000;
+    text-decoration: none;
+}
+
+#modal{
+    visibility:hidden;
+}
+
+.tag_all h2{
+    text-align:center;
+}
